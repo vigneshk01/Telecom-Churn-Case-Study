@@ -1,2 +1,7 @@
 test.csv
 try.ipynb
+try-new.ipynb
+telecom-churn-case-study-v2.ipynb
+
+.jupyter*
+.ipynb*

@@ -26,31 +26,31 @@
 
 There are various ways to define churn, such as:
 
-###### Revenue-based churn:
+##### Revenue-based churn
 
-- Customers who have not utilised any revenue-generating facilities such as mobile internet, outgoing calls, SMS etc. over a given period of time. One could also use aggregate metrics such as ‘customers who have generated less than INR 4 per month in total/average/median revenue’.
+* Customers who have not utilised any revenue-generating facilities such as mobile internet, outgoing calls, SMS etc. over a given period of time. One could also use aggregate metrics such as ‘customers who have generated less than INR 4 per month in total/average/median revenue’.
 
-- The main shortcoming of this definition is that there are customers who only receive calls/SMSes from their wage-earning counterparts, i.e. they don’t generate revenue but use the services. For example, many users in rural areas only receive calls from their wage-earning siblings in urban areas.
+* The main shortcoming of this definition is that there are customers who only receive calls/SMSes from their wage-earning counterparts, i.e. they don’t generate revenue but use the services. For example, many users in rural areas only receive calls from their wage-earning siblings in urban areas.
 
-###### Usage-based churn:
+##### Usage-based churn
 
-- Customers who have not done any usage, either incoming or outgoing - in terms of calls, internet etc. over a period of time.
+* Customers who have not done any usage, either incoming or outgoing - in terms of calls, internet etc. over a period of time.
 
-- A potential shortcoming of this definition is that when the customer has stopped using the services for a while, it may be too late to take any corrective actions to retain them. For e.g., if you define churn based on a ‘two-months zero usage’ period, predicting churn could be useless since by that time the customer would have already switched to another operator.
+* A potential shortcoming of this definition is that when the customer has stopped using the services for a while, it may be too late to take any corrective actions to retain them. For e.g., if you define churn based on a ‘two-months zero usage’ period, predicting churn could be useless since by that time the customer would have already switched to another operator.
 
-- In this project, you will use the usage-based definition to define churn.
+* In this project, you will use the usage-based definition to define churn.
 
-###### High-value churn
+##### High-value churn
 
-- In the Indian and the Southeast Asian market, approximately 80% of revenue comes from the top 20% customers (called high-value customers). Thus, if we can reduce churn of the high-value customers, we will be able to reduce significant revenue leakage.
+* In the Indian and the Southeast Asian market, approximately 80% of revenue comes from the top 20% customers (called high-value customers). Thus, if we can reduce churn of the high-value customers, we will be able to reduce significant revenue leakage.
 
-- In this project, you will define high-value customers based on a certain metric (mentioned later below) and predict churn only on high-value customers.
+* In this project, you will define high-value customers based on a certain metric (mentioned later below) and predict churn only on high-value customers.
 
 ### Understanding the business objective and the data
 
-- The dataset contains customer-level information for a span of four consecutive months - June, July, August and September. The months are encoded as 6, 7, 8 and 9, respectively.
+* The dataset contains customer-level information for a span of four consecutive months - June, July, August and September. The months are encoded as 6, 7, 8 and 9, respectively.
 
-- The business objective is to predict the churn in the last (i.e. the ninth) month using the data (features) from the first three months. To do this task well, understanding the typical customer behaviour during churn will be helpful.
+* The business objective is to predict the churn in the last (i.e. the ninth) month using the data (features) from the first three months. To do this task well, understanding the typical customer behaviour during churn will be helpful.
 
 ### Understanding customer behaviour during churn
 
@@ -68,13 +68,14 @@ In this case, since you are working over a four-month window, the first two mont
 
 The dataset can be download using this link. The data dictionary is provided for download below.
 
-###### Data Dictionary - Telecom Churn : Download
+##### Data Dictionary - Telecom Churn : Download
 
 The data dictionary contains meanings of abbreviations. Some frequent ones are loc (local), IC (incoming), OG (outgoing), T2T (telecom operator to telecom operator), T2O (telecom operator to another operator), RECH (recharge) etc.
 
 The attributes containing 6, 7, 8, 9 as suffixes imply that those correspond to the months 6, 7, 8, 9 respectively.
 
 #### Data Preparation
+
 The following data preparation steps are crucial for this problem:
 
 1. Derive new features
@@ -90,14 +91,15 @@ The following data preparation steps are crucial for this problem:
 
     Now tag the churned customers (churn=1, else 0) based on the fourth month as follows: Those who have not made any calls (either incoming or outgoing) AND have not used mobile internet even once in the churn phase. The attributes you need to use to tag churners are:
 
-    - total_ic_mou_9
-    - total_og_mou_9
-    - vol_2g_mb_9
-    - vol_3g_mb_9
+    * total_ic_mou_9
+    * total_og_mou_9
+    * vol_2g_mb_9
+    * vol_3g_mb_9
 
     After tagging churners, remove all the attributes corresponding to the churn phase (all attributes having ‘ _9’, etc. in their names).
 
 #### Modelling
+
 Build models to predict churn. The predictive model that you’re going to build will serve two purposes:
 
 1. It will be used to predict whether a high-value customer will churn or not, in near future (i.e. churn phase). By knowing this, the company can take action steps such as providing special plans, discounts on recharge etc.
@@ -124,7 +126,8 @@ You can take the following suggestive steps to build the model:
 
 7. Finally, choose a model based on some evaluation metric.
 
-#### Notes:
+#### Notes
+
 The above model will only be able to achieve one of the two goals - to predict customers who will churn. You can’t use the above model to identify the important features for churn. That’s because PCA usually creates components which are not easy to interpret.
 
 Therefore, build another model with the main objective of identifying important predictor attributes which help the business understand indicators of churn. A good choice to identify important variables is a logistic regression model or a model from the tree family. In case of logistic regression, make sure to handle multi-collinearity.
